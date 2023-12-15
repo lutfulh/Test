@@ -1,0 +1,14 @@
+[
+  {
+    "UnitOfMeasure": "PCE",
+    "UnitOfMeasureDescription": "Pieces"
+  },
+  {
+    "UnitOfMeasure": "BOX",
+    "UnitOfMeasureDescription": "Boxes"
+  },
+  {
+    "UnitOfMeasure": "M",
+    "UnitOfMeasureDescription": "Meters"
+  }
+]

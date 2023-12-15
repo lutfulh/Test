@@ -1,0 +1,18 @@
+[
+  {
+    "StorageLocation": "0001",
+    "StorageLocationDescription": "Main Office"
+  },
+  {
+    "StorageLocation": "0002",
+    "StorageLocationDescription": "Office Supplies"
+  },
+  {
+    "StorageLocation": "0003",
+    "StorageLocationDescription": "Warehouse"
+  },
+  {
+    "StorageLocation": "0004",
+    "StorageLocationDescription": "Kitchen Supplies"
+  }
+]

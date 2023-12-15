@@ -1,0 +1,90 @@
+<mvc:View
+    controllerName="fi.neomore.goodsissue.goodsissue1.controller.GoodsIssue"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns:core="sap.ui.core"
+    displayBlock="true">
+
+    <m:Page id="goodsIssuePage" title="Goods Issue">
+        <m:content>
+            <!-- Main FlexBox container for overall vertical layout -->
+            <m:FlexBox direction="Column" alignItems="Stretch" width="100%" class="mainFlexBox">
+
+                <!-- FlexBox for search and dropdown fields -->
+                <m:FlexBox justifyContent="SpaceBetween" alignItems="Start" wrap="Wrap" class="fieldFlexBox">
+                    <m:SearchField id="materialSearch" placeholder="Input material number" search="onSearch" class="wideSearchField" />
+
+                    <m:FlexBox direction="Column" alignItems="Start" class="formFieldContainer">
+                        <m:Label text="Cost Center:" />
+                        <m:Select id="costCenterSelect" items="{costCenters>/}" width="auto" forceSelection="false">
+                            <core:Item key="" text="Select" enabled="false"/>
+                            <core:Item key="{costCenters>CostCenter}" text="{costCenters>CostCenterDescription}" />
+                        </m:Select>
+                    </m:FlexBox>
+
+                    <m:FlexBox direction="Column" alignItems="Start" class="formFieldContainer">
+                        <m:Label text="Plants:" />
+                        <m:Select id="plantsSelect" items="{plants>/}" width="auto" forceSelection="false">
+                            <core:Item key="" text="Select" enabled="false"/>
+                            <core:Item key="{plants>Plant}" text="{plants>Plant}" />
+                        </m:Select>
+                    </m:FlexBox>
+
+                    <m:FlexBox direction="Column" alignItems="Start" class="formFieldContainer">
+                        <m:Label text="Goods Recipient:" />
+                        <m:Select id="goodsRecipientsSelect" items="{goodsRecipients>/}" selectedKey="{/CurrentUserGoodsRecipient}" width="auto">
+                            <core:Item key="{goodsRecipients>GoodsRecipient}" text="{goodsRecipients>GoodsRecipientDescription}" />
+                        </m:Select>
+                    </m:FlexBox>
+                </m:FlexBox>
+
+                <!-- FlexBox for the Message input -->
+                <m:FlexBox direction="Column" alignItems="Start" class="formFieldContainer">
+                    <m:Label text="Message:" />
+                    <m:Input id="messageInput" placeholder="Free Text" width="100%" />
+                </m:FlexBox>
+
+                <!-- FlexBox for the Uploading Point input -->
+                <m:FlexBox direction="Column" alignItems="Start" class="formFieldContainer">
+                    <m:Label text="Uploading Point:" />
+                    <m:Input id="uploadingpointId" placeholder="Free Text" width="100%" />
+                </m:FlexBox>
+
+                <!-- FlexBox container for the items section with a title -->
+                <m:FlexBox direction="Column" alignItems="Start" width="100%">
+                    <m:Title text="Items" level="H2" class="sapUiSmallMarginBottom"/>
+                    <m:Table id="itemsTable" items="{path: '/items', templateShareable: false}" class="itemsTable">
+                        <m:columns>
+                            <m:Column><m:Text text="Material" /></m:Column>
+                            <m:Column><m:Text text="Item Text" /></m:Column>
+                            <m:Column><m:Text text="Storage Location" /></m:Column>
+                            <m:Column><m:Text text="Available Qty." /></m:Column>
+                            <m:Column><m:Text text="Qty. Required" /></m:Column>
+                            <m:Column><m:Text text="Unit of Measure" /></m:Column>
+                            <m:Column><m:Text text="" /></m:Column>
+                        </m:columns>
+                        <m:items>
+                            <m:ColumnListItem>
+                                <m:cells>
+                                    <m:ObjectIdentifier title="{MaterialId}" text="{MaterialDescription}" />
+                                    <m:Text text="{ItemText}" />
+                                    <m:Text text="{StorageLocation}" />
+                                    <m:Text text="{AvailableQuantity}" />
+                                    <m:Text text="{QuantityRequired}" />
+                                    <m:Text text="{UnitOfMeasure}" />
+                                    <m:Button icon="sap-icon://delete" press="onDeleteItem" />
+                                </m:cells>
+                            </m:ColumnListItem>
+                        </m:items>
+                    </m:Table>
+                </m:FlexBox>
+
+                <!-- FlexBox for action buttons -->
+                <m:FlexBox justifyContent="End" alignItems="Center" class="actionButtonFlexBox">
+                    <m:Button id="postButton" text="Post" type="Emphasized" />
+                    <m:Button id="cancelButton" text="Cancel" />
+                </m:FlexBox>
+            </m:FlexBox>
+        </m:content>
+    </m:Page>
+</mvc:View>

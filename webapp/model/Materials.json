@@ -1,0 +1,20 @@
+[
+  {
+    "MaterialId": "1003111",
+    "MaterialDescription": "Pen",
+    "ItemText": null,
+    "StrorageLocation": null,
+    "AvailableQuantity": "200",
+    "QuantityRequired": "0",
+    "UnitOfMeasure": "PCE"
+  },
+  {
+    "MaterialId": "1003112",
+    "MaterialDescription": "Paper",
+    "ItemText": null,
+    "StrorageLocation": null,
+    "AvailableQuantity": "20",
+    "QuantityRequired": "0",
+    "UnitOfMeasure": "BOX"
+  }
+]

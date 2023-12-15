@@ -1,0 +1,10 @@
+[
+  {
+    "CostCenter": "COST1",
+    "CostCenterDescription": "Cost Center 1"
+  },
+  {
+    "CostCenter": "COST2",
+    "CostCenterDescription": "Cost Center 2"
+  }
+]

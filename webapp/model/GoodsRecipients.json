@@ -1,0 +1,10 @@
+[
+  {
+    "GoodsRecipient": "Recipient1",
+    "GoodsRecipientDescription": "Recipient 1"
+  },
+  {
+    "GoodsRecipient": "Recipient2",
+    "GoodsRecipientDescription": "Recipient 2"
+  }
+]

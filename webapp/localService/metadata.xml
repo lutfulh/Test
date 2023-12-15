@@ -1,0 +1,195 @@
+<edmx:Edmx Version="1.0"
+	xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata"
+	xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Capabilities.V1.xml"
+		xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+		<edmx:Include Alias="Capabilities" Namespace="Org.OData.Capabilities.V1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/Common.xml"
+		xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+		<edmx:Include Alias="Common" Namespace="com.sap.vocabularies.Common.v1"/>
+	</edmx:Reference>
+	<edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Core.V1.xml"
+		xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+		<edmx:Include Alias="Core" Namespace="Org.OData.Core.V1"/>
+	</edmx:Reference>
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="ReqruimentService"
+			xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityContainer Name="EntityContainer" m:IsDefaultEntityContainer="true">
+				<EntitySet Name="CostCenters" EntityType="ReqruimentService.CostCenters"/>
+				<EntitySet Name="GoodsRecipients" EntityType="ReqruimentService.GoodsRecipients"/>
+				<EntitySet Name="Plants" EntityType="ReqruimentService.Plants"/>
+				<EntitySet Name="StorageLocations" EntityType="ReqruimentService.StorageLocations"/>
+				<EntitySet Name="UnitOfMeasures" EntityType="ReqruimentService.UnitOfMeasures"/>
+				<EntitySet Name="Materials" EntityType="ReqruimentService.Materials"/>
+				<EntitySet Name="GoodsIssue" EntityType="ReqruimentService.GoodsIssue"/>
+				<AssociationSet Name="GoodsIssue_Materials" Association="ReqruimentService.GoodsIssue_Materials">
+					<End Role="GoodsIssue" EntitySet="GoodsIssue"/>
+					<End Role="Materials" EntitySet="Materials"/>
+				</AssociationSet>
+			</EntityContainer>
+			<EntityType Name="CostCenters">
+				<Key>
+					<PropertyRef Name="CostCenter"/>
+				</Key>
+				<Property Name="CostCenter" Type="Edm.String" MaxLength="10" Nullable="false"/>
+				<Property Name="CostCenterDescription" Type="Edm.String" MaxLength="40"/>
+			</EntityType>
+			<EntityType Name="GoodsRecipients">
+				<Key>
+					<PropertyRef Name="GoodsRecipient"/>
+				</Key>
+				<Property Name="GoodsRecipient" Type="Edm.String" MaxLength="12" Nullable="false"/>
+				<Property Name="GoodsRecipientDescription" Type="Edm.String" MaxLength="40"/>
+			</EntityType>
+			<EntityType Name="Plants">
+				<Key>
+					<PropertyRef Name="Plant"/>
+				</Key>
+				<Property Name="Plant" Type="Edm.String" MaxLength="4" Nullable="false"/>
+				<Property Name="PlantDescription" Type="Edm.String" MaxLength="40"/>
+			</EntityType>
+			<EntityType Name="StorageLocations">
+				<Key>
+					<PropertyRef Name="StorageLocation"/>
+				</Key>
+				<Property Name="StorageLocation" Type="Edm.String" MaxLength="4" Nullable="false"/>
+				<Property Name="StorageLocationDescription" Type="Edm.String" MaxLength="40"/>
+			</EntityType>
+			<EntityType Name="UnitOfMeasures">
+				<Key>
+					<PropertyRef Name="UnitOfMeasure"/>
+				</Key>
+				<Property Name="UnitOfMeasure" Type="Edm.String" MaxLength="3" Nullable="false"/>
+				<Property Name="UnitOfMeasureDescription" Type="Edm.String" MaxLength="40"/>
+			</EntityType>
+			<EntityType Name="Materials">
+				<Key>
+					<PropertyRef Name="MaterialId"/>
+				</Key>
+				<Property Name="MaterialId" Type="Edm.String" MaxLength="18" Nullable="false"/>
+				<Property Name="MaterialDescription" Type="Edm.String" MaxLength="40"/>
+				<Property Name="ItemText" Type="Edm.String" MaxLength="40"/>
+				<Property Name="StorageLocation" Type="Edm.String" MaxLength="4"/>
+				<Property Name="AvailableQuantity" Type="Edm.Decimal" Scale="3" Precision="13"/>
+				<Property Name="QuantityRequired" Type="Edm.Decimal" Scale="3" Precision="13"/>
+				<Property Name="UnitOfMeasure" Type="Edm.String" MaxLength="3"/>
+			</EntityType>
+			<EntityType Name="GoodsIssue">
+				<Property Name="CostCenter" Type="Edm.String" MaxLength="10"/>
+				<Property Name="Plant" Type="Edm.String" MaxLength="4"/>
+				<Property Name="GoodsRecipient" Type="Edm.String" MaxLength="12"/>
+				<Property Name="UnloadingPoint" Type="Edm.String" MaxLength="10"/>
+				<Property Name="Message" Type="Edm.String" MaxLength="40"/>
+				<NavigationProperty Name="Materials" Relationship="ReqruimentService.GoodsIssue_Materials" FromRole="GoodsIssue" ToRole="Materials"/>
+				<Property Name="Materials_MaterialId" Type="Edm.String" MaxLength="18"/>
+			</EntityType>
+			<Association Name="GoodsIssue_Materials">
+				<End Role="GoodsIssue" Type="ReqruimentService.GoodsIssue" Multiplicity="1">
+					<OnDelete Action="Cascade"/>
+				</End>
+				<End Role="Materials" Type="ReqruimentService.Materials" Multiplicity="0..1"/>
+				<ReferentialConstraint>
+					<Principal Role="Materials">
+						<PropertyRef Name="MaterialId"/>
+					</Principal>
+					<Dependent Role="GoodsIssue">
+						<PropertyRef Name="Materials_MaterialId"/>
+					</Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Annotations Target="ReqruimentService.EntityContainer/CostCenters"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Capabilities.DeleteRestrictions">
+					<Record Type="Capabilities.DeleteRestrictionsType">
+						<PropertyValue Property="Deletable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.InsertRestrictions">
+					<Record Type="Capabilities.InsertRestrictionsType">
+						<PropertyValue Property="Insertable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.UpdateRestrictions">
+					<Record Type="Capabilities.UpdateRestrictionsType">
+						<PropertyValue Property="Updatable" Bool="false"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ReqruimentService.EntityContainer/GoodsRecipients"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Capabilities.DeleteRestrictions">
+					<Record Type="Capabilities.DeleteRestrictionsType">
+						<PropertyValue Property="Deletable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.InsertRestrictions">
+					<Record Type="Capabilities.InsertRestrictionsType">
+						<PropertyValue Property="Insertable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.UpdateRestrictions">
+					<Record Type="Capabilities.UpdateRestrictionsType">
+						<PropertyValue Property="Updatable" Bool="false"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ReqruimentService.EntityContainer/Plants"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Capabilities.DeleteRestrictions">
+					<Record Type="Capabilities.DeleteRestrictionsType">
+						<PropertyValue Property="Deletable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.InsertRestrictions">
+					<Record Type="Capabilities.InsertRestrictionsType">
+						<PropertyValue Property="Insertable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.UpdateRestrictions">
+					<Record Type="Capabilities.UpdateRestrictionsType">
+						<PropertyValue Property="Updatable" Bool="false"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ReqruimentService.EntityContainer/StorageLocations"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Capabilities.DeleteRestrictions">
+					<Record Type="Capabilities.DeleteRestrictionsType">
+						<PropertyValue Property="Deletable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.InsertRestrictions">
+					<Record Type="Capabilities.InsertRestrictionsType">
+						<PropertyValue Property="Insertable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.UpdateRestrictions">
+					<Record Type="Capabilities.UpdateRestrictionsType">
+						<PropertyValue Property="Updatable" Bool="false"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+			<Annotations Target="ReqruimentService.EntityContainer/UnitOfMeasures"
+				xmlns="http://docs.oasis-open.org/odata/ns/edm">
+				<Annotation Term="Capabilities.DeleteRestrictions">
+					<Record Type="Capabilities.DeleteRestrictionsType">
+						<PropertyValue Property="Deletable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.InsertRestrictions">
+					<Record Type="Capabilities.InsertRestrictionsType">
+						<PropertyValue Property="Insertable" Bool="false"/>
+					</Record>
+				</Annotation>
+				<Annotation Term="Capabilities.UpdateRestrictions">
+					<Record Type="Capabilities.UpdateRestrictionsType">
+						<PropertyValue Property="Updatable" Bool="false"/>
+					</Record>
+				</Annotation>
+			</Annotations>
+		</Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

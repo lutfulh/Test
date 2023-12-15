@@ -1,0 +1,29 @@
+.mainContainer {
+    margin: 1rem auto;
+    background-color: #fff;
+    max-width: 1024px;
+}
+
+.formElementContainer {
+    padding: 1rem;
+    margin-bottom: 1rem; 
+}
+
+.itemsTable {
+    margin-top: 1rem; 
+    margin-bottom: 2rem; 
+}
+
+.actionButtonsContainer {
+    padding-right: 1rem;
+    margin-top: 1rem; 
+}
+.formFieldContainer {
+    width: 100%; 
+    margin-bottom: 1rem; 
+}
+
+.wideSearchField {
+    width: 50rem; 
+}
+
