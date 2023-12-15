@@ -10,7 +10,7 @@
 |**Service URL**<br>N/A
 |**Module Name**<br>goodsissue1|
 |**Application Title**<br>goodsissue|
-|**Namespace**<br>fi.neomore.goodsissue|
+|**Namespace**<br>fi.neo.goodsissue|
 |**UI5 Theme**<br>sap_horizon|
 |**UI5 Version**<br>1.120.2|
 |**Enable Code Assist Libraries**<br>False|
